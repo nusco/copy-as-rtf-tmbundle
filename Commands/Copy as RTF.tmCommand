@@ -5,13 +5,9 @@
 	<key>command</key>
 	<string>#!/usr/bin/env ruby -Ku
 require "#{ENV['TM_BUNDLE_SUPPORT']}/lib/copy_as_rtf.rb"
-require "#{ENV['TM_SUPPORT_PATH']}/lib/progress.rb"
 doc = RtfExporter.new.generate_rtf( STDIN.read )
-`echo "hi" | pbcopy`
-Kernel.open('|pbcopy','w') do |f|
-  f.write(doc)
-end
-print doc
+Kernel.open('|pbcopy','w') {|f| f.write(doc) }
+puts doc
 </string>
 	<key>input</key>
 	<string>selection</string>
@@ -22,7 +18,7 @@ print doc
 	<key>name</key>
 	<string>Copy as RTF</string>
 	<key>output</key>
-	<string>afterSelectedText</string>
+	<string>openAsNewDocument</string>
 	<key>uuid</key>
 	<string>6F9D791B-B8E5-456D-A574-1B5C71F232FF</string>
 </dict>
